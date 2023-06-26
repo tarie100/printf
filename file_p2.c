@@ -42,12 +42,7 @@ int _handle(const char *format, ...)
 			format += 2;
 			++handle;
 		}
-		else
-		{
-			/** Print any non-conversion specifier characters as is **/
-			putchar(*format);
-			++format;
-		}
+		++format;
 	}
 
 	va_end(args);
