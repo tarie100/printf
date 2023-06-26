@@ -9,25 +9,24 @@
  * Return: integers printed
  */
 
-void _handle(int count, ...)
+void _handle(const char *format, ...)
 {
 	va_list args;
-	int i;
 	int handle;
-	
-	va_start(args, count);
 
-	if (!count)
+	va_start(args, format);
+
+	if (!*format)
 	{
 		return;
 	}
 
-	for (i = 0; i < count; ++i)
+	while (*format != '\0')
 	{
 		handle = va_arg(args, int);
-		printf("%d ", handle);
+		printf("%d\n", handle);
 	}
+	++format;
 
 	va_end(args);
-	printf("\n");
 }

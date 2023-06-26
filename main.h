@@ -2,5 +2,5 @@
 #define MAIN_H
 #include<unistd.h>
 int _printf(const char *format, ...);
-void _handle(int count, ...);
+void _handle(const char *format, ...);
 #endif
