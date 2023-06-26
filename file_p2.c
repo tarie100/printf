@@ -17,7 +17,7 @@ int _handle(const char *format, ...)
 
 	va_start(args, format);
 
-	if (!*format)
+	if (format == NULL)
 	{
 		return (-1);
 	}
