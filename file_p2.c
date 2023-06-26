@@ -12,8 +12,7 @@
 void _handle(const char *format, ...)
 {
 	va_list handle;
-	int i, c = 0; /** Initialize i, c, to 0 **/
-	double d = 0;
+	int i, d = 0; /** Initialize i, d, to 0 **/
 
 	va_start(handle, format);
 
@@ -25,16 +24,13 @@ void _handle(const char *format, ...)
 	{
 		if (*format == 'd')
 		{
+			d = va_arg(handle, int);
+			printf("%d\n", d);
+		}
+		if (*format == 'i')
+		{
 			i = va_arg(handle, int);
-			printf("%d\n", i);
-		} else if (*format == 'c')
-		{
-			c = va_arg(handle, int);
-			printf("%c\n", c);
-		} else if (*format == 'f')
-		{
-			d = va_arg(handle, double);
-			printf("%f\n", d);
+			printf("%i\n", i);
 		}
 		++format;
 	}
