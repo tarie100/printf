@@ -9,7 +9,7 @@
  * Return: integers printed
  */
 
-void _handle(const char *format, ...)
+int _handle(const char *format, ...)
 {
 	va_list args;
 	int handle;
@@ -18,7 +18,7 @@ void _handle(const char *format, ...)
 
 	if (!*format)
 	{
-		return;
+		return (-1);
 	}
 
 	while (*format != '\0')
@@ -29,4 +29,5 @@ void _handle(const char *format, ...)
 	++format;
 
 	va_end(args);
+	return (handle);
 }
