@@ -12,7 +12,8 @@
 int _handle(const char *format, ...)
 {
 	va_list args;
-	int handle;
+	int handle = 0;
+	int value;
 
 	va_start(args, format);
 
@@ -23,10 +24,31 @@ int _handle(const char *format, ...)
 
 	while (*format != '\0')
 	{
-		handle = va_arg(args, int);
-		printf("%d\n", handle);
+		if (*format == '%' && *(format + 1) == 'd')
+		{
+			/** Handle integer conversion specifier '%d' **/
+			value = va_arg(args, int);
+			printf("%d\n", value);
+			/** Increment the format pointer to skip the conversion specifier **/
+			format += 2;
+			++handle;
+		}
+		else if (*format == '%' && *(format + 1) == 'i')
+		{
+			/** Handle integer conversion specifier '%i' **/
+			value = va_arg(args, int);
+			printf("%d\n", value);
+			/** Increment the format pointer to skip the conversion specifier **/
+			format += 2;
+			++handle;
+		}
+		else
+		{
+			/** Print any non-conversion specifier characters as is **/
+			putchar(*format);
+			++format;
+		}
 	}
-	++format;
 
 	va_end(args);
 	return (handle);
