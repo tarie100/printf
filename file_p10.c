@@ -1,29 +1,41 @@
-#include"main.h"
 #include<stdarg.h>
+#include"main.h"
 #include<stdlib.h>
-#include<stdio.h>
+#include<ctype.h>
 /**
- * format_dbl - precision for non-custom conversion specifiers
- * @a: precision 1
- * @precision: precision 2
- * @str: output sting
+ * _precision - returns the precision for printing
+ * @format: string
+ * @i: arguments to be printed.
+ * @args: arguments.
+ * Return: Precision.
  */
-void format_dbl(double a, int precision, char *str)
+int _precision(const char *format, int *i, va_list args)
 {
-	(void) precision;
-	sprintf(str, "%.2f", a);
-}
-/**
- * _putchar - outputs the precision
- * Return: 0
- */
-int _putchar(void)
-{
-	double a = 3.14159;
-	int precision = 2;
-	char str[20];
+	int prec = -1;
+	int ci = *i + 1;
 
-	format_dbl(a, precision, str);
-	printf("%s", str);
-	return (0);
+	if (format[ci] != '.')
+		return (prec);
+
+	prec = 0;
+	for (ci += 1; format[ci] != '\0'; ci++)
+	{
+		if (isxdigit(format[ci]))
+		{
+			prec *= 10;
+			prec += format[ci] - '0';
+		}
+		else if (format[ci] == '*')
+		{
+			ci++;
+			prec = va_arg(args, int);
+			break;
+		}
+		else
+			break;
+	}
+
+	*i = ci - 1;
+
+	return (prec);
 }
