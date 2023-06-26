@@ -24,25 +24,17 @@ int _handle(const char *format, ...)
 
 	while (*format != '\0')
 	{
-		if (*format == '%' && *(format + 1) == 'd')
+		if (*format == '%' && (*(format + 1) == 'd' || *(format + 1) == 'i'))
 		{
-			/** Handle integer conversion specifier '%d' **/
 			value = va_arg(args, int);
 			printf("%d\n", value);
-			/** Increment the format pointer to skip the conversion specifier **/
 			format += 2;
-			++handle;
+			handle++;
 		}
-		else if (*format == '%' && *(format + 1) == 'i')
+		else
 		{
-			/** Handle integer conversion specifier '%i' **/
-			value = va_arg(args, int);
-			printf("%d\n", value);
-			/** Increment the format pointer to skip the conversion specifier **/
-			format += 2;
-			++handle;
+			format++;
 		}
-		++format;
 	}
 
 	va_end(args);
