@@ -9,39 +9,35 @@
  * Return: integers printed
  */
 
-int _handle(const char *format, ...)
+void _handle(const char *format, ...)
 {
 	va_list handle;
-	int y = 0; /** Initialize y to 0 **/
+	int i, c = 0; /** Initialize i, c, to 0 **/
+	double d = 0;
 
 	va_start(handle, format);
 
 	if (format == NULL)
 	{
-		return (-1);
+		return;
 	}
-	if (*format == '%')
+	while (*format != '\0')
 	{
-		++format;
-		switch (*format)
+		if (*format == 'd')
 		{
-			case ('d'):
-				y += printf("%d", va_arg(handle, int));
-				break;
-			case ('i'):
-				y += printf("%i", va_arg(handle, int));
-				break;
-			default:
-				y += printf("?");
-				break;
+			i = va_arg(handle, int);
+			printf("%d\n", i);
+		} else if (*format == 'c')
+		{
+			c = va_arg(handle, int);
+			printf("%c\n", c);
+		} else if (*format == 'f')
+		{
+			d = va_arg(handle, double);
+			printf("%f\n", d);
 		}
+		++format;
 	}
-	else
-	{
-		y += printf("%d", *format);
-	}
-	++format;
 
 	va_end(handle);
-	return (y);
 }
