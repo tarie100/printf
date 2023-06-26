@@ -18,7 +18,7 @@ int _handle(const char *format, ...)
 
 	if (format == NULL)
 	{
-		return (1);
+		return (-1);
 	}
 	if (*format == '%')
 	{
@@ -40,6 +40,7 @@ int _handle(const char *format, ...)
 	{
 		y += printf("%d", *format);
 	}
+	++format;
 
 	va_end(handle);
 	return (y);
