@@ -31,10 +31,7 @@ int _handle(const char *format, ...)
 			format += 2;
 			handle++;
 		}
-		else
-		{
-			format++;
-		}
+		format++;
 	}
 
 	va_end(args);
