@@ -40,8 +40,8 @@ int _handle(const char *format, ...)
 		{
 			c = *format;
 			write(1, &c, 1);
-			format++;
 		}
+		format++;
 	}
 
 	va_end(args);
