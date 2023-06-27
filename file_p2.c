@@ -1,6 +1,7 @@
-#include"main.h"
-#include<stdio.h>
-#include<stdarg.h>
+#include "main.h"
+#include <stdio.h>
+#include <stdarg.h>
+#include <unistd.h>
 
 /**
  * _handle - handling conversion specifiers
@@ -12,8 +13,11 @@
 int _handle(const char *format, ...)
 {
 	va_list args;
-	int handle = 0;
+	int a = 0;
 	int value;
+	int length;
+	char c;
+	char buffer[20];
 
 	va_start(args, format);
 
@@ -27,13 +31,19 @@ int _handle(const char *format, ...)
 		if (*format == '%' && (*(format + 1) == 'd' || *(format + 1) == 'i'))
 		{
 			value = va_arg(args, int);
-			printf("%d\n", value);
+			length = snprintf(buffer, sizeof(buffer), "%d\n", value);
+			write(1, buffer, length);
 			format += 2;
-			handle++;
+			a++;
 		}
-		format++;
+		else
+		{
+			c = *format;
+			write(1, &c, 1);
+			format++;
+		}
 	}
 
 	va_end(args);
-	return (handle);
+	return (a);
 }
