@@ -18,10 +18,10 @@ int _string(char *ps)
 		ps = "(null)";
 	}
 
-	do {
+	while (ps[a] != '\0')
+	{
 		write(1, &ps[a], 1);
 		a++;
-	} while (ps[a] != '\0');
-
+	}
 	return (a);
 }
