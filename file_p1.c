@@ -1,5 +1,7 @@
 #include"main.h"
 #include<stdio.h>
+#include<unistd.h>
+#include<string.h>
 #include<stdarg.h>
 /**
  * _printf -  produces output according to a format.
@@ -9,7 +11,10 @@
 int _printf(const char *format, ...)
 {
 	int a;
+	char b;
 	va_list args;
+	char *str;
+	size_t length;
 
 	va_start(args, format);
 	if (format == NULL)
@@ -24,22 +29,33 @@ int _printf(const char *format, ...)
 			format++;
 			switch (*format)
 			{
-				case ('c'):
-					a += printf("%c", va_arg(args, int));
-					break;
-				case ('s'):
-					    a += printf("%s", va_arg(args, char *));
-					break;
-				case ('%'):
-					    a += printf("%%");
-					break;
-				default:
-					    a += printf("?");
+				case ('c'):{
+						   b = va_arg(args, int);
+						   write(1, &b, 1);
+						   ++a;
+						   break;
+					   }
+				case ('s'):{
+						   str = va_arg(args, char *);
+						   length = strlen(str);
+						   write(1, str, length);
+						   a += length;
+						   break;
+					   }
+				case ('%'):{
+						   write(1, "%", 1);
+						   ++a;
+						   break;
+					   }
+				default:{
+						break;
+					}
 			}
 		}
 		else
 		{
-			a += printf("%c", *format);
+			write(1, format, 1);
+			++a;
 		}
 		format++;
 	}
