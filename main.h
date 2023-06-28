@@ -8,4 +8,6 @@ int _putchar(void);
 /** Custom Binary**/
 void print_binary(unsigned int n);
 void custom_printf(const char *format, ...);
+/** String Print **/
+int _string(char *ps);
 #endif
